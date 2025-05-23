@@ -1,0 +1,64 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add New Product</h2>
+                    </div>
+                    <div class="card-body">
+                        <a href="{{ route('products.index') }}" class="btn btn-primary mb-3">Back to List</a>
+                        
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        
+                        <form action="{{ route('products.store') }}" method="POST">
+                            @csrf
+                            
+                            <div class="form-group mb-3">
+                                <label for="name">Name:</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter name">
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control" name="description" rows="3" placeholder="Enter description"></textarea>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="price">Price:</label>
+                                <input type="number" name="price" class="form-control" step="0.01" placeholder="Enter price">
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" name="quantity" class="form-control" placeholder="Enter quantity">
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="category">Category:</label>
+                                <input type="text" name="category" class="form-control" placeholder="Enter category">
+                            </div>
+                            
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" name="is_active" checked>
+                                <label class="form-check-label" for="is_active">Active</label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
